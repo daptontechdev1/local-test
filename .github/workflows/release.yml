@@ -26,9 +26,6 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Run Release Please to create/update the release pull request
         run: |
           npx release-please release-pr --release-type node
