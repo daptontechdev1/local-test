@@ -47,6 +47,6 @@ jobs:
 
       - name: Release Please publish release
         run: |
-          npx release-please github-release --repo-url ${{ github.repository }} --target-branch ${{ github.ref_name }}
+          npx release-please github-release --repo-url daptontechdev1/local-test --target-branch ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
