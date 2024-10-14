@@ -50,4 +50,3 @@ jobs:
           npx release-please github-release --repo-url ${{ github.repository }} --target-branch ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
