@@ -28,7 +28,7 @@ jobs:
 
       - name: Run Release Please to create/update the release pull request
         run: |
-          npx release-please release-pr --release-type node --repo-url daptontechdev1/local-test --target-branch ${{ github.ref_name }} --debug
+          npx release-please release-pr --release-type simple --repo-url daptontechdev1/local-test --target-branch ${{ github.ref_name }} --debug
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
 
