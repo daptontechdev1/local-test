@@ -21,6 +21,6 @@ jobs:
 
       - name: Run release-please
         run: |
-          npx release-please release-pr --token ${{ secrets.GITHUB_TOKEN }} --branch ${{ github.ref_name }}
+          npx release-please release-pr --token ${{ secrets.GITHUB_TOKEN }} --repo-url ${{ github.repository }} --branch ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
