@@ -1,7 +1,10 @@
-name: Release
+name: Release with Sentry
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
       - staging
@@ -10,17 +13,49 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      pull-requests: write
+
     steps:
-      - name: Checkout the code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '18'
 
-      - name: Run release-please
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Release Please to create/update the release pull request
         run: |
-          npx release-please release-pr --token ${{ secrets.GITHUB_TOKEN }} --repo-url ${{ github.repository }} --target-branch ${{ github.ref_name }}
+          npx release-please release-pr --release-type node
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: release
+    if: github.event_name == 'push'
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Release Please publish release
+        run: |
+          npx release-please github-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Associate Commits with Sentry Release
+        run: |
+          sentry-cli releases set-commits --auto ${{ steps.version.outputs.version }}
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
