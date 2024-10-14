@@ -1,0 +1,14 @@
+{
+  "branches": [
+    {
+      "branch": "main",
+      "release-type": "node",
+      "prerelease": false
+    },
+    {
+      "branch": "staging",
+      "release-type": "node",
+      "prerelease": true
+    }
+  ]
+}
