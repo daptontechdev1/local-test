@@ -30,7 +30,7 @@ jobs:
         run: |
           npx release-please release-pr --release-type simple --repo-url daptontechdev1/local-test --target-branch ${{ github.ref_name }} --debug
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish:
     runs-on: ubuntu-latest
@@ -49,4 +49,4 @@ jobs:
         run: |
           npx release-please github-release --repo-url daptontechdev1/local-test --target-branch ${{ github.ref_name }} --debug
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
