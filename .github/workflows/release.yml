@@ -50,3 +50,4 @@ jobs:
           npx release-please github-release --repo-url daptontechdev1/local-test --target-branch ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          
