@@ -51,8 +51,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Associate Commits with Sentry Release
-        run: |
-          sentry-cli releases set-commits --auto ${{ steps.version.outputs.version }}
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
